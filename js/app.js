@@ -1,0 +1,1 @@
+function mostrarPaso1(){document.getElementById("paso1").classList.remove("d-none");window.scrollTo({top:500,behavior:"smooth"});}
