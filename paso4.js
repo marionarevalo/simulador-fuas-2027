@@ -46,5 +46,26 @@ document.addEventListener("DOMContentLoaded", () => {
 	const backQuery = new URLSearchParams({ comprobante: JSON.stringify(payload) }).toString();
 	document.getElementById("volver").href = `paso3.html?${backQuery}`;
 	document.getElementById("imprimir").addEventListener("click", () => window.print());
-	document.getElementById("finalizar").addEventListener("click", () => document.getElementById("mensaje-final").classList.remove("d-none"));
+	document.getElementById("finalizar").addEventListener("click", async () => {
+    const boton = document.getElementById("finalizar");
+
+    boton.disabled = true;
+
+    try {
+        await fetch("https://script.google.com/macros/s/AKfycbz4Ykg_5-7lhcOlOTxZgtoCcttp0mOHDqHuJRmvd7S3STPZt7CsAGrFDCKvgiU_1tnI/exec", {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        document.getElementById("mensaje-final").classList.remove("d-none");
+
+    } catch (error) {
+        console.error("Error al enviar los datos:", error);
+        alert("No fue posible enviar los datos. Por favor, inténtalo nuevamente.");
+        boton.disabled = false;
+    }
+});
 });
