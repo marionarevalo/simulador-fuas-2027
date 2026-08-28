@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Pantalla de práctica del Simulador FUAS 2027 para talleres de INACAP">
+	<title>Simulador FUAS 2027 | Datos del postulante</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		:root {
+			--inacap-blue: #0057a8;
+			--inacap-navy: #12365a;
+			--page-gray: #f3f6f9;
+		}
+
+		body {
+			background: var(--page-gray);
+			color: #263746;
+		}
+
+		.app-header {
+			background: linear-gradient(135deg, var(--inacap-navy), var(--inacap-blue));
+		}
+
+		.brand-placeholder {
+			align-items: center;
+			background: #fff;
+			border-radius: 0.5rem;
+			color: var(--inacap-blue);
+			display: flex;
+			font-size: 0.75rem;
+			font-weight: 700;
+			height: 3.5rem;
+			justify-content: center;
+			letter-spacing: 0.04em;
+			padding: 0.5rem;
+			text-align: center;
+			width: 7rem;
+		}
+
+		.section-card {
+			border: 0;
+			border-radius: 1rem;
+		}
+
+		.section-heading {
+			color: var(--inacap-blue);
+		}
+
+		.section-number {
+			align-items: center;
+			background: #e7f1fb;
+			border-radius: 50%;
+			color: var(--inacap-blue);
+			display: inline-flex;
+			font-size: 1rem;
+			font-weight: 700;
+			height: 2.25rem;
+			justify-content: center;
+			margin-right: 0.65rem;
+			width: 2.25rem;
+		}
+
+		.form-label {
+			color: #35495c;
+			font-weight: 600;
+		}
+
+		.form-control,
+		.form-select {
+			border-color: #d5dfe8;
+			min-height: 2.9rem;
+		}
+
+		.form-control:focus,
+		.form-select:focus {
+			border-color: var(--inacap-blue);
+			box-shadow: 0 0 0 0.2rem rgba(0, 87, 168, 0.15);
+		}
+
+		@media (max-width: 576px) {
+			.app-header .container {
+				align-items: flex-start;
+				flex-direction: column;
+				gap: 1rem;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header class="app-header text-white py-3">
+		<div class="container d-flex align-items-center justify-content-between gap-3">
+			<div>
+				<p class="small text-uppercase fw-semibold mb-1 opacity-75">Talleres de orientación</p>
+				<h1 class="h4 mb-0 fw-bold">Simulador FUAS 2027</h1>
+			</div>
+			<!-- Placeholder: assets/img/logo-inacap.png aún no existe en el proyecto. -->
+			<img class="brand-placeholder" src="assets/img/logo-inacap.png" alt="Logo INACAP" style="object-fit: contain;">
+		</div>
+	</header>
+
+	<main class="container py-4 py-lg-5">
+		<div class="row justify-content-center">
+			<div class="col-12 col-xl-10">
+				<div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4">
+					<div>
+						<p class="text-primary fw-semibold mb-2">PASO 1 DE 5</p>
+						<h2 class="display-6 fw-bold mb-2">Información del postulante</h2>
+						<p class="text-secondary mb-0">Completa tus antecedentes para practicar el proceso de postulación.</p>
+					</div>
+					<span class="badge rounded-pill text-bg-light border px-3 py-2">Práctica no oficial</span>
+				</div>
+
+				<div class="progress mb-5" role="progressbar" aria-label="Progreso del simulador" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 0.5rem;">
+					<div class="progress-bar" style="width: 20%; background-color: var(--inacap-blue);"></div>
+				</div>
+
+				<form id="formulario-paso-1" novalidate>
+					<!-- BLOQUE 1: DATOS PERSONALES -->
+					<section class="card section-card shadow-sm mb-4" aria-labelledby="datos-personales-titulo">
+						<div class="card-body p-4 p-lg-5">
+							<h3 id="datos-personales-titulo" class="section-heading h4 fw-bold mb-4"><span class="section-number">1</span>Datos personales</h3>
+							<div class="row g-4">
+								<div class="col-md-4"><label for="rut" class="form-label">RUT <span class="text-primary" aria-hidden="true">*</span></label><input type="text" class="form-control" id="rut" name="rut"></div>
+								<div class="col-md-4"><label for="nombres" class="form-label">Nombres <span class="text-primary" aria-hidden="true">*</span></label><input type="text" class="form-control" id="nombres" name="nombres"></div>
+								<div class="col-md-4"><label for="apellido-paterno" class="form-label">Apellido paterno <span class="text-primary" aria-hidden="true">*</span></label><input type="text" class="form-control" id="apellido-paterno" name="apellido-paterno"></div>
+								<div class="col-md-4"><label for="apellido-materno" class="form-label">Apellido materno</label><input type="text" class="form-control" id="apellido-materno" name="apellido-materno"></div>
+								<div class="col-md-4"><label for="correo" class="form-label">Correo electrónico <span class="text-primary" aria-hidden="true">*</span></label><input type="email" class="form-control" id="correo" name="correo"></div>
+								<div class="col-md-4"><label for="fecha-nacimiento" class="form-label">Fecha de nacimiento <span class="text-primary" aria-hidden="true">*</span></label><input type="date" class="form-control" id="fecha-nacimiento" name="fecha-nacimiento"></div>
+								<div class="col-md-4"><label for="estado-civil" class="form-label">Estado civil <span class="text-primary" aria-hidden="true">*</span></label><select class="form-select" id="estado-civil" name="estado-civil"><option selected>Selecciona una opción</option><option>Soltero/a</option><option>Casado/a</option><option>Divorciado/a</option><option>Viudo/a</option><option>Conviviente civil</option></select></div>
+								<div class="col-md-4"><label for="nacionalidad" class="form-label">Nacionalidad <span class="text-primary" aria-hidden="true">*</span></label><select class="form-select" id="nacionalidad" name="nacionalidad"><option selected>Selecciona una opción</option><option>Chilena</option><option>Argentina</option><option>Boliviana</option><option>Peruana</option><option>Venezolana</option><option>Otra</option></select></div>
+								<div class="col-md-4"><label for="pais-origen" class="form-label">País de origen</label><input type="text" class="form-control" id="pais-origen" name="pais-origen"></div>
+								<div class="col-md-4"><label for="pueblo-originario" class="form-label">Pueblo originario</label><select class="form-select" id="pueblo-originario" name="pueblo-originario"><option selected>Selecciona una opción</option><option>Ninguno</option><option>Mapuche</option><option>Aymara</option><option>Rapa Nui</option><option>Otro</option></select></div>
+								<div class="col-md-4"><label for="actividad" class="form-label">Actividad <span class="text-primary" aria-hidden="true">*</span></label><select class="form-select" id="actividad" name="actividad" aria-describedby="actividad-ayuda"><option selected>Seleccione una opción</option><option>Estudiante</option><option>Trabajador dependiente del sector público</option><option>Trabajador dependiente del sector privado</option><option>Trabajador independiente</option><option>Estudiante y trabajador</option><option>Dueño(a) de casa</option><option>Cesante</option><option>Jubilado(a) o pensionado(a)</option><option>Otro</option></select><small id="actividad-ayuda" class="form-text text-secondary">Selecciona la opción que mejor represente tu situación actual.</small></div>
+								<div class="col-md-4"><label for="nivel-estudios" class="form-label">Nivel de estudios <span class="text-primary" aria-hidden="true">*</span></label><select class="form-select" id="nivel-estudios" name="nivel-estudios" aria-describedby="nivel-estudios-ayuda"><option selected>Seleccione una opción</option><option>Sin escolaridad</option><option>Enseñanza básica incompleta</option><option>Enseñanza básica completa</option><option>Enseñanza media incompleta</option><option>Enseñanza media completa</option><option>Educación superior técnica incompleta</option><option>Educación superior técnica completa</option><option>Educación superior profesional incompleta</option><option>Educación superior profesional completa</option><option>Postítulo</option></select><small id="nivel-estudios-ayuda" class="form-text text-secondary">Selecciona el nivel educacional más alto que hayas alcanzado.</small></div>
+								<div class="col-md-4"><label for="condicion-salud" class="form-label">Condición de salud</label><input type="text" class="form-control" id="condicion-salud" name="condicion-salud"></div>
+							</div>
+						</div>
+					</section>
+
+					<!-- BLOQUE 2: INTERESES ACADÉMICOS -->
+					<section class="card section-card shadow-sm mb-4" aria-labelledby="intereses-academicos-titulo">
+						<div class="card-body p-4 p-lg-5">
+							<h3 id="intereses-academicos-titulo" class="section-heading h4 fw-bold mb-4"><span class="section-number">2</span>Intereses académicos</h3>
+							<div class="row g-4">
+								<div class="col-12">
+									<label for="carrera-interes" class="form-label">¿Qué carrera te interesa estudiar?</label>
+									<input type="text" class="form-control" id="carrera-interes" name="carrera-interes" placeholder="Escribe aquí la carrera que te interesa..." aria-describedby="carrera-interes-ayuda">
+									<small id="carrera-interes-ayuda" class="form-text text-secondary">Si aún no tienes una carrera definida, puedes escribir 'No lo sé aún'.</small>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- BLOQUE 3: DATOS DE CONTACTO -->
+					<section class="card section-card shadow-sm mb-4" aria-labelledby="datos-contacto-titulo">
+						<div class="card-body p-4 p-lg-5">
+							<h3 id="datos-contacto-titulo" class="section-heading h4 fw-bold mb-4"><span class="section-number">3</span>Datos de contacto</h3>
+							<div class="row g-4">
+								<div class="col-md-6"><label for="telefono-fijo" class="form-label">Teléfono fijo</label><input type="tel" class="form-control" id="telefono-fijo" name="telefono-fijo"></div>
+								<div class="col-md-6"><label for="celular" class="form-label">Celular</label><input type="tel" class="form-control" id="celular" name="celular"></div>
+							</div>
+						</div>
+					</section>
+
+					<!-- BLOQUE 4: DIRECCIÓN DEL GRUPO FAMILIAR -->
+					<section class="card section-card shadow-sm mb-4" aria-labelledby="direccion-titulo">
+						<div class="card-body p-4 p-lg-5">
+							<h3 id="direccion-titulo" class="section-heading h4 fw-bold mb-4"><span class="section-number">4</span>Dirección del grupo familiar</h3>
+							<div class="row g-4">
+								<div class="col-md-8"><label for="direccion" class="form-label">Dirección <span class="text-primary" aria-hidden="true">*</span></label><input type="text" class="form-control" id="direccion" name="direccion"></div>
+								<div class="col-md-4"><label for="numero" class="form-label">Número</label><input type="text" class="form-control" id="numero" name="numero"></div>
+								<div class="col-md-4"><label for="departamento" class="form-label">Departamento</label><input type="text" class="form-control" id="departamento" name="departamento"></div>
+								<div class="col-md-8"><label for="villa-poblacion" class="form-label">Villa o Población</label><input type="text" class="form-control" id="villa-poblacion" name="villa-poblacion"></div>
+								<div class="col-md-6"><label for="region" class="form-label">Región <span class="text-primary" aria-hidden="true">*</span></label><select class="form-select" id="region" name="region" aria-describedby="region-ayuda"><option selected value="">Selecciona una región</option><option value="arica-y-parinacota">Arica y Parinacota</option><option value="tarapaca">Tarapacá</option><option value="antofagasta">Antofagasta</option><option value="atacama">Atacama</option><option value="coquimbo">Coquimbo</option><option value="valparaiso">Valparaíso</option><option value="metropolitana">Metropolitana de Santiago</option><option value="ohiggins">O'Higgins</option><option value="maule">Maule</option><option value="nuble">Ñuble</option><option value="biobio">Biobío</option><option value="la-araucania">La Araucanía</option><option value="los-rios">Los Ríos</option><option value="los-lagos">Los Lagos</option><option value="aysen">Aysén</option><option value="magallanes">Magallanes</option></select><small id="region-ayuda" class="form-text text-secondary">Selecciona la región donde resides actualmente.</small></div>
+								<div class="col-md-6"><label for="comuna" class="form-label">Comuna <span class="text-primary" aria-hidden="true">*</span></label><select class="form-select" id="comuna" name="comuna" aria-describedby="comuna-ayuda"><option selected value="">Seleccione una comuna</option></select><small id="comuna-ayuda" class="form-text text-secondary">Las comunas disponibles dependen de la región seleccionada.</small></div>
+							</div>
+						</div>
+					</section>
+
+					<!-- BLOQUE 5: ANTECEDENTES ACADÉMICOS ENSEÑANZA MEDIA -->
+					<section class="card section-card shadow-sm mb-4" aria-labelledby="ensenanza-media-titulo">
+						<div class="card-body p-4 p-lg-5">
+							<h3 id="ensenanza-media-titulo" class="section-heading h4 fw-bold mb-4"><span class="section-number">5</span>Antecedentes académicos de enseñanza media</h3>
+							<div class="row g-4">
+								<div class="col-md-3"><label for="tipo-establecimiento" class="form-label">Tipo de establecimiento</label><select class="form-select" id="tipo-establecimiento" name="tipo-establecimiento"><option selected>Selecciona una opción</option><option>Municipal</option><option>Particular subvencionado</option><option>Particular pagado</option><option>Administración delegada</option></select></div>
+								<div class="col-md-5"><label for="nombre-establecimiento" class="form-label">Nombre del establecimiento educacional <span class="text-primary" aria-hidden="true">*</span></label><input type="text" class="form-control" id="nombre-establecimiento" name="nombre-establecimiento" aria-describedby="nombre-establecimiento-ayuda"><small id="nombre-establecimiento-ayuda" class="form-text text-secondary">Escribe el nombre del establecimiento donde cursaste o estás cursando enseñanza media.</small></div>
+								<div class="col-md-2"><label for="nem" class="form-label">NEM</label><input type="text" class="form-control" id="nem" name="nem"></div>
+								<div class="col-md-2"><label for="ano-egreso" class="form-label">Año de egreso</label><input type="number" class="form-control" id="ano-egreso" name="ano-egreso"></div>
+							</div>
+						</div>
+					</section>
+
+					<!-- BLOQUE 6: ANTECEDENTES DE EDUCACIÓN SUPERIOR -->
+					<section class="card section-card shadow-sm mb-4" aria-labelledby="educacion-superior-titulo">
+						<div class="card-body p-4 p-lg-5">
+							<h3 id="educacion-superior-titulo" class="section-heading h4 fw-bold mb-4"><span class="section-number">6</span>Antecedentes de educación superior</h3>
+							<div class="row g-4">
+								<div class="col-md-6"><label for="institucion" class="form-label">Institución</label><input type="text" class="form-control" id="institucion" name="institucion"></div>
+								<div class="col-md-6"><label for="ano-matricula" class="form-label">Año de matrícula</label><input type="number" class="form-control" id="ano-matricula" name="ano-matricula"></div>
+								<div class="col-12">
+									<p class="form-label mb-2">¿Posee cuenta de ahorro para educación superior?</p>
+									<div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="cuenta-ahorro" id="cuenta-ahorro-si" value="si"><label class="form-check-label" for="cuenta-ahorro-si">Sí</label></div>
+									<div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="cuenta-ahorro" id="cuenta-ahorro-no" value="no"><label class="form-check-label" for="cuenta-ahorro-no">No</label></div>
+								</div>
+								<div class="col-12">
+									<p class="form-label mb-2">¿Cursó los cuatro años de enseñanza media en Chile?</p>
+									<div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="media-en-chile" id="media-en-chile-si" value="si"><label class="form-check-label" for="media-en-chile-si">Sí</label></div>
+									<div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="media-en-chile" id="media-en-chile-no" value="no"><label class="form-check-label" for="media-en-chile-no">No</label></div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</form>
+				<div class="d-flex justify-content-end mt-4">
+					<button type="submit" class="btn btn-primary px-4" form="formulario-paso-1" id="continuar">Continuar</button>
+				</div>
+
+				<p class="small text-secondary text-center mt-4 mb-0">Esta interfaz es una herramienta de práctica para talleres de orientación de INACAP.</p>
+			</div>
+		</div>
+	</main>
+	<script src="js/paso1.js"></script>
+</body>
+</html>

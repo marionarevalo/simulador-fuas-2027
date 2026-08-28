@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador FUAS 2027</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-light">
+<main class="container py-4 py-lg-5">
+	<header class="mb-5">
+		<p class="text-primary fw-semibold mb-2">SIMULADOR DE ORIENTACIÓN INACAP</p>
+		<h1 class="display-5 fw-bold text-primary mb-3">Simulador FUAS 2027</h1>
+		<p class="lead text-secondary mb-4">Paso 1 de 5: Información personal y académica</p>
+		<div class="progress" role="progressbar" aria-label="Progreso del formulario" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 8px;">
+			<div class="progress-bar bg-primary" style="width: 20%"></div>
+		</div>
+	</header>
+
+	<form aria-label="Formulario de información personal y académica">
+		<!-- BLOQUE 1: DATOS PERSONALES -->
+		<section class="card border-0 shadow-sm mb-4" aria-labelledby="datos-personales-titulo">
+			<div class="card-body p-4 p-lg-5">
+				<h2 id="datos-personales-titulo" class="h3 text-primary fw-bold mb-4">1. Datos personales</h2>
+				<div class="row g-4">
+					<div class="col-md-4"><label for="rut" class="form-label">RUT</label><input type="text" class="form-control" id="rut" name="rut"></div>
+					<div class="col-md-4"><label for="nombres" class="form-label">Nombres</label><input type="text" class="form-control" id="nombres" name="nombres"></div>
+					<div class="col-md-4"><label for="apellido-paterno" class="form-label">Apellido paterno</label><input type="text" class="form-control" id="apellido-paterno" name="apellido-paterno"></div>
+					<div class="col-md-4"><label for="apellido-materno" class="form-label">Apellido materno</label><input type="text" class="form-control" id="apellido-materno" name="apellido-materno"></div>
+					<div class="col-md-4"><label for="correo" class="form-label">Correo electrónico</label><input type="email" class="form-control" id="correo" name="correo"></div>
+					<div class="col-md-4"><label for="fecha-nacimiento" class="form-label">Fecha de nacimiento</label><input type="date" class="form-control" id="fecha-nacimiento" name="fecha-nacimiento"></div>
+					<div class="col-md-4"><label for="estado-civil" class="form-label">Estado civil</label><select class="form-select" id="estado-civil" name="estado-civil"><option selected>Selecciona una opción</option><option>Soltero/a</option><option>Casado/a</option><option>Divorciado/a</option><option>Viudo/a</option><option>Conviviente civil</option></select></div>
+					<div class="col-md-4"><label for="nacionalidad" class="form-label">Nacionalidad</label><input type="text" class="form-control" id="nacionalidad" name="nacionalidad"></div>
+					<div class="col-md-4"><label for="pais-origen" class="form-label">País de origen</label><input type="text" class="form-control" id="pais-origen" name="pais-origen"></div>
+					<div class="col-md-4"><label for="pueblo-originario" class="form-label">Pueblo originario</label><select class="form-select" id="pueblo-originario" name="pueblo-originario"><option selected>Selecciona una opción</option><option>Ninguno</option><option>Mapuche</option><option>Aymara</option><option>Otro</option></select></div>
+					<div class="col-md-4"><label for="actividad" class="form-label">Actividad</label><input type="text" class="form-control" id="actividad" name="actividad"></div>
+					<div class="col-md-4"><label for="nivel-estudios" class="form-label">Nivel de estudios</label><input type="text" class="form-control" id="nivel-estudios" name="nivel-estudios"></div>
+					<div class="col-md-4"><label for="condicion-salud" class="form-label">Condición de salud</label><input type="text" class="form-control" id="condicion-salud" name="condicion-salud"></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- BLOQUE 2: DATOS DE CONTACTO -->
+		<section class="card border-0 shadow-sm mb-4" aria-labelledby="datos-contacto-titulo">
+			<div class="card-body p-4 p-lg-5">
+				<h2 id="datos-contacto-titulo" class="h3 text-primary fw-bold mb-4">2. Datos de contacto</h2>
+				<div class="row g-4">
+					<div class="col-md-6">
+						<label for="telefono-fijo" class="form-label">Teléfono fijo</label>
+						<input type="tel" class="form-control" id="telefono-fijo" name="telefono-fijo">
+					</div>
+					<div class="col-md-6">
+						<label for="celular" class="form-label">Celular</label>
+						<input type="tel" class="form-control" id="celular" name="celular">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- BLOQUE 3: DIRECCIÓN DEL GRUPO FAMILIAR -->
+		<section class="card border-0 shadow-sm mb-4" aria-labelledby="direccion-titulo">
+			<div class="card-body p-4 p-lg-5">
+				<h2 id="direccion-titulo" class="h3 text-primary fw-bold mb-4">3. Dirección del grupo familiar</h2>
+				<div class="row g-4">
+					<div class="col-md-8"><label for="direccion" class="form-label">Dirección</label><input type="text" class="form-control" id="direccion" name="direccion"></div>
+					<div class="col-md-4"><label for="numero" class="form-label">Número</label><input type="text" class="form-control" id="numero" name="numero"></div>
+					<div class="col-md-4"><label for="departamento" class="form-label">Departamento</label><input type="text" class="form-control" id="departamento" name="departamento"></div>
+					<div class="col-md-8"><label for="villa-poblacion" class="form-label">Villa o Población</label><input type="text" class="form-control" id="villa-poblacion" name="villa-poblacion"></div>
+					<div class="col-md-6">
+						<label for="region" class="form-label">Región</label>
+						<select class="form-select" id="region" name="region">
+							<option selected>Selecciona una región</option>
+							<option>Arica y Parinacota</option><option>Tarapacá</option><option>Antofagasta</option><option>Atacama</option><option>Coquimbo</option><option>Valparaíso</option><option>Metropolitana de Santiago</option><option>Libertador General Bernardo O'Higgins</option><option>Maule</option><option>Ñuble</option><option>Biobío</option><option>La Araucanía</option><option>Los Ríos</option><option>Los Lagos</option><option>Aysén</option><option>Magallanes y de la Antártica Chilena</option>
+						</select>
+					</div>
+					<div class="col-md-6">
+						<label for="comuna" class="form-label">Comuna</label>
+						<select class="form-select" id="comuna" name="comuna"><option selected>Selecciona una comuna</option></select>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- BLOQUE 4: ANTECEDENTES ACADÉMICOS ENSEÑANZA MEDIA -->
+		<section class="card border-0 shadow-sm mb-4" aria-labelledby="ensenanza-media-titulo">
+			<div class="card-body p-4 p-lg-5">
+				<h2 id="ensenanza-media-titulo" class="h3 text-primary fw-bold mb-4">4. Antecedentes académicos de enseñanza media</h2>
+				<div class="row g-4">
+					<div class="col-md-5">
+						<label for="tipo-establecimiento" class="form-label">Tipo de establecimiento</label>
+						<select class="form-select" id="tipo-establecimiento" name="tipo-establecimiento"><option selected>Selecciona una opción</option><option>Municipal</option><option>Particular subvencionado</option><option>Particular pagado</option><option>Administración delegada</option></select>
+					</div>
+					<div class="col-md-3"><label for="nem" class="form-label">NEM</label><input type="text" class="form-control" id="nem" name="nem"></div>
+					<div class="col-md-4"><label for="ano-egreso" class="form-label">Año de egreso</label><input type="number" class="form-control" id="ano-egreso" name="ano-egreso"></div>
+				</div>
+			</div>
+		</section>
+
+		<!-- BLOQUE 5: ANTECEDENTES EDUCACIÓN SUPERIOR -->
+		<section class="card border-0 shadow-sm mb-4" aria-labelledby="educacion-superior-titulo">
+			<div class="card-body p-4 p-lg-5">
+				<h2 id="educacion-superior-titulo" class="h3 text-primary fw-bold mb-4">5. Antecedentes de educación superior</h2>
+				<div class="row g-4">
+					<div class="col-md-6"><label for="institucion" class="form-label">Institución</label><input type="text" class="form-control" id="institucion" name="institucion"></div>
+					<div class="col-md-6"><label for="ano-matricula" class="form-label">Año de matrícula</label><input type="number" class="form-control" id="ano-matricula" name="ano-matricula"></div>
+					<div class="col-12">
+						<p class="form-label mb-2">¿Posee cuenta de ahorro para educación superior?</p>
+						<div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="cuenta-ahorro" id="cuenta-ahorro-si" value="si"><label class="form-check-label" for="cuenta-ahorro-si">Sí</label></div>
+						<div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="cuenta-ahorro" id="cuenta-ahorro-no" value="no"><label class="form-check-label" for="cuenta-ahorro-no">No</label></div>
+					</div>
+					<div class="col-12">
+						<p class="form-label mb-2">¿Cursó los cuatro años de enseñanza media en Chile?</p>
+						<div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="media-en-chile" id="media-en-chile-si" value="si"><label class="form-check-label" for="media-en-chile-si">Sí</label></div>
+						<div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="media-en-chile" id="media-en-chile-no" value="no"><label class="form-check-label" for="media-en-chile-no">No</label></div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</form>
+</main>
+</body>
+</html>

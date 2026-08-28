@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Pantalla de práctica del Simulador FUAS 2027 para talleres de INACAP">
+	<title>Simulador FUAS 2027 | Ingresos familiares</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/styles.css">
+	<style>
+		:root {
+			--inacap-blue: #0057a8;
+			--inacap-navy: #12365a;
+			--page-gray: #f3f6f9;
+		}
+		body { background: var(--page-gray); color: #263746; }
+		.app-header { background: linear-gradient(135deg, var(--inacap-navy), var(--inacap-blue)); }
+		.brand-placeholder { align-items: center; background: #fff; border-radius: 0.5rem; color: var(--inacap-blue); display: flex; font-size: 0.75rem; font-weight: 700; height: 3.5rem; justify-content: center; letter-spacing: 0.04em; padding: 0.5rem; text-align: center; width: 7rem; }
+		.section-card, .member-card { border: 0; border-radius: 1rem; }
+		.section-heading { color: var(--inacap-blue); }
+		.section-number { align-items: center; background: #e7f1fb; border-radius: 50%; color: var(--inacap-blue); display: inline-flex; font-size: 1rem; font-weight: 700; height: 2.25rem; justify-content: center; margin-right: 0.65rem; width: 2.25rem; }
+		.form-label { color: #35495c; font-weight: 600; }
+		.form-control, .form-select { border-color: #d5dfe8; min-height: 2.9rem; }
+		.form-control:focus, .form-select:focus { border-color: var(--inacap-blue); box-shadow: 0 0 0 0.2rem rgba(0, 87, 168, 0.15); }
+		.income-table { min-width: 1450px; }
+		.income-table th { white-space: normal; vertical-align: middle; }
+		.income-table td { min-width: 120px; vertical-align: middle; }
+		.income-table .person-cell { min-width: 180px; }
+		.income-table .total-cell { color: var(--inacap-blue); font-weight: 700; min-width: 145px; white-space: nowrap; }
+		.currency-input { min-width: 110px; text-align: right; }
+		.summary-value { color: var(--inacap-blue); font-size: 1.25rem; font-weight: 700; }
+		@media (max-width: 576px) { .app-header .container { align-items: flex-start; flex-direction: column; gap: 1rem; } }
+	</style>
+</head>
+<body>
+	<header class="app-header text-white py-3">
+		<div class="container d-flex align-items-center justify-content-between gap-3">
+			<div><p class="small text-uppercase fw-semibold mb-1 opacity-75">Talleres de orientación</p><h1 class="h4 mb-0 fw-bold">Simulador FUAS 2027</h1></div>
+			<!-- Placeholder: assets/img/logo-inacap.png aún no existe en el proyecto. -->
+			<img class="brand-placeholder" src="assets/img/logo-inacap.png" alt="Logo INACAP" style="object-fit: contain;">
+		</div>
+	</header>
+
+	<main class="container py-4 py-lg-5">
+		<div class="row justify-content-center"><div class="col-12 col-xl-11">
+			<div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4">
+				<div><p class="text-primary fw-semibold mb-2">PASO 3 DE 5</p><h2 class="display-6 fw-bold mb-2">Promedio mensual de los ingresos del grupo familiar</h2><p class="text-secondary mb-0">Ingresa los ingresos mensuales de cada integrante del grupo familiar para los años 2025 y 2026. Considera sueldos, pensiones, honorarios, retiros, dividendos, intereses, ganancias de capital, pensión de alimentos, aportes de familiares y actividades independientes.</p></div>
+				<span class="badge rounded-pill text-bg-light border px-3 py-2">Práctica no oficial</span>
+			</div>
+			<div class="progress mb-5" role="progressbar" aria-label="Progreso del simulador" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 0.5rem;"><div class="progress-bar" style="width: 60%; background-color: var(--inacap-blue);"></div></div>
+
+			<form id="formulario-paso-3" novalidate>
+				<!-- BLOQUE: INGRESOS DEL GRUPO FAMILIAR -->
+				<section class="card section-card shadow-sm mb-4" aria-labelledby="ingresos-titulo">
+					<div class="card-body p-4 p-lg-5">
+						<h3 id="ingresos-titulo" class="section-heading h4 fw-bold mb-3"><span class="section-number">1</span>Promedio mensual de los ingresos del grupo familiar</h3>
+						<p class="text-secondary mb-2">Ingresa los montos mensuales correspondientes a cada integrante y año.</p>
+						<p class="small text-secondary mb-4">Si no recibiste ingresos por algún concepto, ingresa $0.</p>
+						<div class="table-responsive"><table class="table table-bordered align-middle income-table"><thead class="table-light"><tr><th scope="col" class="person-cell">Integrante</th><th scope="col">Año</th><th scope="col">Sueldos</th><th scope="col">Pensiones</th><th scope="col">Honorarios</th><th scope="col">Retiros</th><th scope="col">Dividendos por acciones</th><th scope="col">Intereses de capitales mobiliarios</th><th scope="col">Ganancias de capitales mobiliarios</th><th scope="col">Pensión alimenticia y otros aportes de parientes</th><th scope="col">Actividades independientes</th><th scope="col" class="total-cell">Total</th></tr></thead><tbody id="ingresos-body"></tbody></table></div>
+					</div>
+				</section>
+
+				<!-- BLOQUE: TOTAL MENSUAL DEL GRUPO FAMILIAR -->
+				<section class="border rounded bg-white p-4 mb-4" aria-labelledby="resumen-titulo">
+					<h3 id="resumen-titulo" class="section-heading h4 fw-bold mb-3">Total mensual grupo familiar</h3>
+					<div class="table-responsive">
+						<table class="table table-sm table-bordered mb-0">
+							<thead class="table-light"><tr><th scope="col">Año</th><th scope="col">Total mensual</th></tr></thead>
+							<tbody>
+								<tr><th scope="row">2025</th><td id="total-2025" class="summary-value">$0</td></tr>
+								<tr><th scope="row">2026</th><td id="total-2026" class="summary-value">$0</td></tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="mt-4">
+						<p class="mb-2"><span class="text-secondary">Promedio mensual 2025:</span> <strong id="promedio-2025">$0</strong></p>
+						<p class="mb-2"><span class="text-secondary">Promedio mensual 2026:</span> <strong id="promedio-2026">$0</strong></p>
+					</div>
+				</section>
+				<div class="d-flex flex-column flex-sm-row justify-content-between gap-3 mt-4"><a class="btn btn-outline-secondary px-4" href="paso2.html">Volver</a><button type="submit" class="btn btn-primary px-4" id="continuar" formaction="paso4.html">Continuar</button></div>
+			</form>
+			<p class="small text-secondary text-center mt-4 mb-0">Esta interfaz es una herramienta de práctica para talleres de orientación de INACAP.</p>
+		</div></div>
+	</main>
+	<script src="paso3.js"></script>
+</body>
+</html>
