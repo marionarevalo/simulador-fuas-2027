@@ -12,23 +12,43 @@ document.addEventListener("DOMContentLoaded", () => {
 		"pension-alimenticia",
 		"actividades-independientes"
 	];
+	const STORAGE_KEY = "simulador_fuas_2027_paso2";
 	const currencyFormatter = new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
 	let hasSubmitted = false;
 
-	const formatCurrency = (amount) => currencyFormatter.format(amount || 0);
+	const formatCurrency = (amount) => currencyFormatter.format(Number(amount) || 0);
+
+	const leerJsonParametro = (nombre, valorPorDefecto) => {
+		try {
+			const valor = new URLSearchParams(window.location.search).get(nombre);
+			return valor ? JSON.parse(valor) : valorPorDefecto;
+		} catch {
+			return valorPorDefecto;
+		}
+	};
+
+	const leerEstadoGuardado = () => {
+		try {
+			const estado = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "null");
+			return estado && typeof estado === "object" ? estado : null;
+		} catch {
+			return null;
+		}
+	};
 
 	const readIntegrantes = () => {
-		const params = new URLSearchParams(window.location.search);
-		try {
-			const payload = JSON.parse(params.get("comprobante") || "null");
-			const integrantes = payload?.integrantes || JSON.parse(params.get("integrantes") || "[]");
-			const postulante = payload?.postulante || JSON.parse(params.get("postulante") || "null");
-			const familiares = Array.isArray(integrantes) ? integrantes : [];
-			const grupo = postulante && familiares[0]?.rut !== postulante.rut ? [postulante, ...familiares] : familiares;
-			return grupo.length > 0 ? grupo : [{ numero: 1 }];
-		} catch {
-			return [{ numero: 1 }];
-		}
+		const estado = leerEstadoGuardado();
+		const postulanteParametro = leerJsonParametro("postulante", null);
+		const integrantesParametro = leerJsonParametro("integrantes", []);
+		const postulante = postulanteParametro || estado?.postulante || null;
+		const integrantes = Array.isArray(integrantesParametro) && integrantesParametro.length
+			? integrantesParametro
+			: (Array.isArray(estado?.integrantes) ? estado.integrantes : []);
+		const familiares = Array.isArray(integrantes) ? integrantes : [];
+		const grupo = postulante && !familiares.some((integrante) => integrante?.rut === postulante.rut)
+			? [postulante, ...familiares]
+			: familiares;
+		return grupo.length > 0 ? grupo : [{ numero: 1 }];
 	};
 
 	const nombreCompleto = (integrante, indice) => {
@@ -92,18 +112,39 @@ document.addEventListener("DOMContentLoaded", () => {
 	const totalRow = (memberIndex, year) => Array.from(form.querySelectorAll(`input[data-member="${memberIndex}"][data-year="${year}"]`)).reduce((total, input) => total + getInputAmount(input), 0);
 
 	const actualizarTotales = () => {
-		form.querySelectorAll(".total-cell[data-member]").forEach((cell) => {
-			cell.textContent = formatCurrency(totalRow(cell.dataset.member, cell.dataset.year));
-		});
-		const total2025 = Array.from(form.querySelectorAll('input[data-year="2025"]')).reduce((total, input) => total + getInputAmount(input), 0);
-		const total2026 = Array.from(form.querySelectorAll('input[data-year="2026"]')).reduce((total, input) => total + getInputAmount(input), 0);
-		const promedio2025 = total2025 / 12;
-		const promedio2026 = total2026 / 9;
-		document.getElementById("total-2025").textContent = formatCurrency(total2025);
-		document.getElementById("total-2026").textContent = formatCurrency(total2026);
-		document.getElementById("promedio-2025").textContent = formatCurrency(promedio2025);
-		document.getElementById("promedio-2026").textContent = formatCurrency(promedio2026);
-	};
+
+    form.querySelectorAll(".total-cell[data-member]").forEach((cell) => {
+        cell.textContent = formatCurrency(
+            totalRow(cell.dataset.member, cell.dataset.year)
+        );
+    });
+
+    const total2025 = Array.from(
+        form.querySelectorAll('input[data-year="2025"]')
+    ).reduce(
+        (total, input) => total + getInputAmount(input),
+        0
+    );
+
+    const total2026 = Array.from(
+        form.querySelectorAll('input[data-year="2026"]')
+    ).reduce(
+        (total, input) => total + getInputAmount(input),
+        0
+    );
+
+    const elemento2025 = document.getElementById("total-2025");
+    const elemento2026 = document.getElementById("total-2026");
+
+    if (elemento2025) {
+        elemento2025.textContent = formatCurrency(total2025);
+    }
+
+    if (elemento2026) {
+        elemento2026.textContent = formatCurrency(total2026);
+    }
+
+};
 
 	const validarIngreso = (input) => {
 		const amount = input.value.trim();
@@ -153,9 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const crearDatosComprobante = () => {
 		const integrantes = readIntegrantes();
-		const params = new URLSearchParams(window.location.search);
-		const payload = JSON.parse(params.get("comprobante") || "null");
-		const postulante = payload?.postulante || JSON.parse(params.get("postulante") || "null") || integrantes[0];
+		const postulante = leerJsonParametro("postulante", null) || leerEstadoGuardado()?.postulante || integrantes[0];
 		const ingresos = Array.from(form.querySelectorAll(".currency-input"), (input) => ({
 			member: Number(input.dataset.member),
 			year: Number(input.dataset.year),
@@ -165,47 +204,57 @@ document.addEventListener("DOMContentLoaded", () => {
 		return { postulante, integrantes, ingresos };
 	};
 
-	readIntegrantes().forEach((integrante, indice) => {
+	const integrantes = readIntegrantes();
+	integrantes.forEach((integrante, indice) => {
 		[2025, 2026].forEach((year) => incomeBody.append(createIncomeRow(integrante, indice, year)));
 	});
-	const datosPrevios = new URLSearchParams(window.location.search).get("comprobante");
-	if (datosPrevios) {
-		try {
-			const ingresosPrevios = JSON.parse(datosPrevios).ingresos || [];
-			form.querySelectorAll(".currency-input").forEach((input) => {
-				const ingreso = ingresosPrevios.find((item) => item.member === Number(input.dataset.member) && item.year === Number(input.dataset.year) && item.category === input.dataset.category);
-				if (ingreso) input.value = ingreso.value;
-			});
-		} catch {
-			// El formulario permanece disponible con valores vacíos si el enlace no es válido.
-		}
+
+	const datosPrevios = leerJsonParametro("comprobante", null);
+	if (datosPrevios && Array.isArray(datosPrevios.ingresos)) {
+		form.querySelectorAll(".currency-input").forEach((input) => {
+			const ingreso = datosPrevios.ingresos.find((item) => item.member === Number(input.dataset.member) && item.year === Number(input.dataset.year) && item.category === input.dataset.category);
+			if (ingreso) input.value = ingreso.value || "";
+		});
 	}
-	form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  hasSubmitted = true;
+	actualizarTotales();
 
-  const invalidos = validarFormulario();
+	form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    hasSubmitted = true;
 
-  if (invalidos.length === 0) {
-    const datosComprobante = crearDatosComprobante();
+    const invalidos = validarFormulario();
 
-    try {
-      await enviarDatosNomina(datosComprobante);
+    if (invalidos.length === 0) {
+        const datosComprobante = crearDatosComprobante();
 
-      const parametros = new URLSearchParams({
-        comprobante: JSON.stringify(datosComprobante)
-      });
+        console.log("DATOS QUE ENVÍA PASO 3:", datosComprobante);
 
-      window.location.href = `paso4.html?${parametros.toString()}`;
+        // Guardar también en sessionStorage
+        sessionStorage.setItem(
+            "simulador_fuas_comprobante",
+            JSON.stringify(datosComprobante)
+        );
 
-    } catch (error) {
-      console.error("Error al enviar datos a la API:", error);
+        console.log(
+            "COMPROBANTE GUARDADO:",
+            sessionStorage.getItem("simulador_fuas_comprobante")
+        );
 
-      alert("No fue posible guardar la información. Intenta nuevamente.");
+
+// Enviar el comprobante al Paso 4 mediante la URL
+const parametros = new URLSearchParams({
+    comprobante: JSON.stringify(datosComprobante)
+});
+
+console.log(
+    "URL QUE ENVÍA PASO 3:",
+    `paso4.html?${parametros.toString()}`
+);
+
+window.location.href = `paso4.html?${parametros.toString()}`;
+
+    } else {
+        enfocarPrimerError(invalidos);
     }
-
-  } else {
-    enfocarPrimerError(invalidos);
-  }
 });
 });
